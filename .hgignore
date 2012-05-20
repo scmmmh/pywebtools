@@ -1,0 +1,15 @@
+
+syntax: regexp
+^\.settings$
+syntax: regexp
+^\.coverage$
+syntax: regexp
+^\.project$
+syntax: regexp
+^\.pydevproject$
+syntax: regexp
+^dist$
+syntax: regexp
+^virtualenv$
+syntax: regexp
+^src/PyWebTools\.egg-info$
