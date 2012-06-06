@@ -13,3 +13,5 @@ syntax: regexp
 ^virtualenv$
 syntax: regexp
 ^src/PyWebTools\.egg-info$
+syntax: regexp
+^doc/_build$

@@ -1,20 +1,33 @@
 # -*- coding: utf-8 -*-
-'''Copyright 2012 Mark Hall (Mark.Hall@work.room3b.eu)
+# Copyright 2012 Mark Hall (Mark.Hall@work.room3b.eu)
+# 
+# This file is part of the PyWebTools.
+# 
+# The PyWebTools is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# 
+# The PyWebTools are distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU Lesser General Public License
+# along with PyWebTools. If not, see <http://www.gnu.org/licenses/>.
+'''
+:mod:`pywebtools.form`
+======================
 
-This file is part of the PyWebTools.
+This module provides a number of helper functions for generating form elements
+using the `<http://genshi.edgewall.org/>`_ framework.
 
-The PyWebTools is free software: you can redistribute it and/or modify
-it under the terms of the GNU Lesser General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-The PyWebTools are distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with PyWebTools. If not, see <http://www.gnu.org/licenses/>.
+Each helper function will take an optional error object and if the name of the
+form field is mapped to an error in the error object, then wrapper elements will
+be added around the field to highlight the error and show the error message. It
+is designed to work with the error objects provided by `<http://www.formencode.org>`_
+(:py:class:`formencode.api.Invalid`), but will happily work with any error object that has a ``error_dict`` attribute,
+which maps form field names to error messages.
 '''
 
 from genshi.builder import tag, Markup
@@ -38,12 +51,31 @@ def error_wrapper(content, field, e):
         return content
 
 def hidden_field(name, value, **attr):
+    '''Generates a hidden input field with the given name and value.
+    
+    Wraps the hidden field in a span element that is set to "display:none".
+    
+    :param name: The name of the hidden field to generate
+    :param value: The value to set in the hidden field
+    '''
     return tag.span(tag.input(type="hidden", name=name, value=value, **attr), style='display:none;')
 
 def csrf_token_field(token):
+    '''Generates a hidden input field with the name "csrf_token" and the given token
+    value.
+    
+    :param token: The CSRF token value to set in the hidden field
+    '''
     return hidden_field('csrf_token', token)
 
 def text_field(name, text, e, **attr):
+    '''Generates a text field with the given name and default text. All further
+    parameters are passed on to Genshi.
+    
+    :param name: The field name
+    :param text: The default value
+    :param e: The error object
+    '''
     return error_wrapper(tag.input(type='text', name=name, value=text, **attr), name, e)
 
 def number_field(name, text, e, **attr):
