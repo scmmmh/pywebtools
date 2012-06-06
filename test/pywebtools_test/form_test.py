@@ -104,6 +104,24 @@ def test_checkbox():
     geq(tag.input(type='checkbox', name='checkbox_field', value='selected', checked='checked'),
         checkbox('checkbox_field', 'selected', None, checked='whatever'))
 
+def test_radio():
+    geq(tag.input(type='radio', name='radio_field', value='selected'),
+        radio('radio_field', 'selected', None))
+    geq(tag(tag.input(type='radio', name='radio_field', value='selected', id='radio_field.selected'),
+            Markup('&nbsp;'), tag.label('A label', for_='radio_field.selected')),
+        radio('radio_field', 'selected', None, label='A label'))
+    geq(tag(tag.input(type='radio', name='radio_field', value='selected', id='custom_id'),
+            Markup('&nbsp;'), tag.label('A label', for_='custom_id')),
+        radio('radio_field', 'selected', None, label='A label', id='custom_id'))
+    geq(tag.input(type='radio', name='radio_field', value='selected', checked='checked'),
+        radio('radio_field', 'selected', None, checked=True))
+    geq(tag.input(type='radio', name='radio_field', value='selected', checked='checked'),
+        radio('radio_field', 'selected', None, checked='checked'))
+    geq(tag.input(type='radio', name='radio_field', value='selected', checked='checked'),
+        radio('radio_field', 'selected', None, **{'checked': 'checked'}))
+    geq(tag.input(type='radio', name='radio_field', value='selected', checked='checked'),
+        radio('radio_field', 'selected', None, checked='whatever'))
+
 def test_textarea():
     geq(tag.textarea('This is a text to edit', name='textarea'),
         textarea('textarea', 'This is a text to edit', None))

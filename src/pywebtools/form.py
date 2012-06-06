@@ -86,6 +86,19 @@ def checkbox(name, value, e, checked=False, label=None, **attr):
     else:
         return error_wrapper(tag.input(type='checkbox', name=name, value=value, **attr), name, e)
 
+def radio(name, value, e, checked=False, label=None, **attr):
+    if checked:
+        attr['checked'] = 'checked'
+    if label:
+        if 'id' not in attr:
+            attr['id'] = '%s.%s' % (name, value)
+        return error_wrapper(tag(tag.input(type='radio', name=name, value=value, **attr),
+                                 Markup('&nbsp;'),
+                                 tag.label(label, for_=attr['id'])),
+                             name, e)
+    else:
+        return error_wrapper(tag.input(type='radio', name=name, value=value, **attr), name, e)
+
 def textarea(name, text, e, **attr):
     return error_wrapper(tag.textarea(text, name=name, **attr), name, e)
 
