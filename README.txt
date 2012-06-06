@@ -15,3 +15,5 @@ pywebtools.text:
 
 pywebtools.ui:
   User-interface helpers
+
+Full documentation can be found at `<http://readthedocs.org/docs/pywebtools>`_.
