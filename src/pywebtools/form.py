@@ -93,7 +93,7 @@ def text_field(name, default, e, **attr):
     :param default: The default value
     :param e: The error object
     '''
-    return error_wrapper(tag.input(type='default', name=name, value=default, **attr), name, e)
+    return error_wrapper(tag.input(type='text', name=name, value=default, **attr), name, e)
 
 def number_field(name, default, e, **attr):
     '''Generates a number input field with the given name and default value. All further
