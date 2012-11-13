@@ -1,3 +1,8 @@
+0.3
+---
+
+- NEW: pywebtools.renderer module for integrating Genshi with the Pyramid framework
+
 0.2.1
 -----
 
