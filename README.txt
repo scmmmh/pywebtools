@@ -10,6 +10,10 @@ pywebtools.auth:
 pywebtools.form:
   Form generation helpers
 
+pywebtools.renderer:
+  A decorator that simplifies the use of Genshi with the Pyramid framework.
+  Has additional package requirements (see the pywebtools.renderer documentation)
+  
 pywebtools.text:
   Text formatting helpers
 
