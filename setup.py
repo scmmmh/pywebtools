@@ -11,7 +11,7 @@ requires = [
     ]
 
 setup(name='PyWebTools',
-      version='0.3',
+      version='0.4',
       description='A collection of helpers for use with the Genshi templating framework',
       long_description=README + '\n\n' +  CHANGES,
       classifiers=[
