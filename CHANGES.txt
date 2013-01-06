@@ -1,3 +1,8 @@
+0.4
+---
+
+- UPDATE: pywebtools.renderer template defaults are now set per content type
+
 0.3
 ---
 

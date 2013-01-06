@@ -82,13 +82,16 @@ def request_from_args(*args):
     else:
         raise RendererException('No request found')
     
-def template_defaults(request):
+def template_defaults(request, content_type):
     global _template_defaults
-    template_defaults = copy(_template_defaults)
-    template_defaults['r'] = request
-    return template_defaults
+    if content_type and content_type in _template_defaults:
+        td = copy(_template_defaults[content_type])
+    else:
+        td = {}
+    td['r'] = request
+    return td
 
-def match_response_type(view_content_types, request):
+def match_response_type(content_types, request):
     accept_header = unicode(request.accept)
     if request.matchdict and 'ext' in request.matchdict and request.matchdict['ext']:
         if request.matchdict['ext'] == 'html':
@@ -99,9 +102,7 @@ def match_response_type(view_content_types, request):
             accept_header = 'text/csv'
         elif request.matchdict['ext'] == 'xml':
             accept_header = 'application/xml'
-    response_type = mimeparse.best_match(view_content_types.keys(), accept_header)
-    if not response_type or response_type not in view_content_types:
-        raise HTTPNotAcceptable()
+    response_type = mimeparse.best_match(content_types.keys(), accept_header)
     return response_type
 
 def handle_html_response(request, response_template, result):
@@ -115,7 +116,6 @@ def handle_html_response(request, response_template, result):
     return response
 
 def handle_json_response(request, result):
-    del result['h']
     del result['r']
     if 'e' in result:
         result['e'] = result['e'].error_dict
@@ -141,9 +141,11 @@ def handle_xml_response(request, response_template, result):
 def render(content_types={}, allow_cache=True):
     def wrapper(f, *args, **kwargs):
         request = request_from_args(*args)
-        result = template_defaults(request)
-        result.update(f(*args, **kwargs))
         response_type = match_response_type(content_types, request)
+        if not response_type or response_type not in content_types:
+            raise HTTPNotAcceptable()
+        result = template_defaults(request, response_type)
+        result.update(f(*args, **kwargs))
         response_template = content_types[response_type]
         if response_type == 'application/json':
             response = handle_json_response(request, result)
