@@ -17,3 +17,5 @@ syntax: regexp
 ^doc/_build$
 syntax: glob
 *.pyc
+syntax: regexp
+^build$
