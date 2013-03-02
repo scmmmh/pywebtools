@@ -1,3 +1,8 @@
+0.4.1
+-----
+
+- BUGFIX: Fixed the way the request is identified in the Genshi renderer
+
 0.4
 ---
 
