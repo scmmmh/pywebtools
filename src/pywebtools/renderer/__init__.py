@@ -75,12 +75,10 @@ def init(settings, template_defaults=None):
                                     auto_reload=auto_reload)
 
 def request_from_args(*args):
-    if len(args) == 1 and isinstance(args[0], Request):
-        return args[0]
-    elif len(args) == 2 and isinstance(args[1], Request):
-        return args[1]
-    else:
-        raise RendererException('No request found')
+    for arg in args:
+        if isinstance(arg, Request):
+            return arg
+    raise RendererException('No request found')
     
 def template_defaults(request, content_type):
     global _template_defaults
