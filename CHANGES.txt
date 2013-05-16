@@ -1,3 +1,9 @@
+0.5
+-----
+
+- NEW: assert_authorised raises an auth.AccessDeniedException if the
+  authorisation statement does not hold
+  
 0.4.2
 -----
 

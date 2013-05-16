@@ -39,6 +39,11 @@ class AuthorisationException(Exception):
     def __str__(self):
         return self.message
 
+class AccessDeniedException(AuthorisationException):
+    
+    def __init__(self):
+        AuthorisationException.__init__(self, 'Access denied')
+
 def tokenise(auth_string):
     def process(token):
         token = ''.join(token)
@@ -284,3 +289,9 @@ def is_authorised(auth_string, objects):
     if len(stack) == 0:
         raise AuthorisationException('Empty authorisation statement') # pragma: no cover
     return bool(stack[0][1])
+
+def assert_authorised(auth, objects):
+    if is_authorised(auth, objects):
+        return True
+    else:
+        raise AccessDeniedException()
