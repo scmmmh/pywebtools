@@ -1,3 +1,8 @@
+0.5.1
+-----
+
+- BUGFIX: Don't force a unicode conversion when outputting CSV files
+
 0.5
 -----
 
