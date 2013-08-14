@@ -126,7 +126,7 @@ def handle_csv_response(request, result):
     writer.writeheader()
     for row in result['rows']:
         writer.writerow(row)
-    response = Response(unicode(f.getvalue()))
+    response = Response(f.getvalue())
     f.close()
     return response
 
