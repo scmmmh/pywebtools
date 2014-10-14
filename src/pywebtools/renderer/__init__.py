@@ -110,15 +110,15 @@ def handle_html_response(request, response_template, result):
     else:
         result['e'] = None
         template = template.generate(**result)
-    response = Response(template.render('xhtml'))
-    return response
+    request.response.text = template.render('xhtml')
+    return request.response
 
 def handle_json_response(request, result):
     del result['r']
     if 'e' in result:
         result['e'] = result['e'].error_dict
-    response = Response(json.dumps(result))
-    return response
+    request.response.body = json.dumps(result)
+    return request.response
 
 def handle_csv_response(request, result):
     f = StringIO()
@@ -126,15 +126,16 @@ def handle_csv_response(request, result):
     writer.writeheader()
     for row in result['rows']:
         writer.writerow(row)
-    response = Response(f.getvalue())
+    response = request.response
+    response.body = f.getvalue()
     f.close()
     return response
 
 def handle_xml_response(request, response_template, result):
     template = _genshi_loader.load(response_template)
     template = template.generate(**result)
-    response = Response(template.render('xml'))
-    return response
+    request.response.text = template.render('xml')
+    return request.response
 
 def render(content_types={}, allow_cache=True):
     def wrapper(f, *args, **kwargs):
