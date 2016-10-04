@@ -22,7 +22,7 @@ setup(name='PyWebTools',
       long_description=README + '\n\n' +  CHANGES,
       classifiers=[
                    'Development Status :: 4 - Beta',
-                   'Programming Language :: Python',
+                   'Programming Language :: Python :: 3',
                    'Topic :: Internet :: WWW/HTTP',
                    'Topic :: Software Development :: Libraries :: Python Modules',
                    'Intended Audience :: Developers',
