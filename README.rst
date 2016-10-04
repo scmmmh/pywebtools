@@ -4,7 +4,7 @@ PyWebTools README
 The PyWebTools package provides a number of helpers for use with Pyramid_, Kajiki_,
 Formencode_, and SQLAlchemy_ packages.
 
-Full documentation can be found at http://readthedocs.org/docs/pywebtools.
+Full documentation can be found at http://pywebtools.readthedocs.io.
 
 .. image:: https://readthedocs.org/projects/pywebtools/badge/?version=latest
    :target: http://pywebtools.readthedocs.io/en/latest/?badge=latest
