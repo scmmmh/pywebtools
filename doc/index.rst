@@ -6,28 +6,15 @@
 Welcome to PyWebTools's documentation!
 ======================================
 
-The PyWebTools package provides a number of helpers for use with the Genshi
-templating framework (`<http://genshi.edgewall.org/>`_). It provides four main
-modules:
-
-:mod:`pywebtools.auth`
-  A simple authentication parsing library
-  
-:mod:`pywebtools.form`
-  Form generation helpers
-
-pywebtools.text
-  Text formatting helpers
-
-pywebtools.ui
-  User-interface helpers
+The PyWebTools package provides a number of helpers for use with Pyramid_, Kajiki_,
+Formencode_, and SQLAlchemy_ packages.
 
 API Documentation:
 
 .. toctree::
    :maxdepth: 2
    
-   form
+   api/index
 
 
 Indices and tables
@@ -37,3 +24,7 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
+.. _Pyramid: https://trypyramid.com/
+.. _Kajiki: http://pythonhosted.org/Kajiki/
+.. _Formencode: http://www.formencode.org
+.. _SQLAlchemy: http://www.sqlalchemy.org/

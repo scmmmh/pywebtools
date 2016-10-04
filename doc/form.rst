@@ -1,2 +1,0 @@
-.. automodule:: pywebtools.form
-   :members:

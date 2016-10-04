@@ -7,12 +7,18 @@ README = open(os.path.join(here, 'README.txt')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 requires = [
-    'genshi',
+    'kajiki',
+    'sqlalchemy',
+    'formencode',
+    'pyramid',
+    'decorator',
+    'transaction',
+    'zope.sqlalchemy'
     ]
 
 setup(name='PyWebTools',
-      version='0.5.1',
-      description='A collection of helpers for use with the Genshi templating framework',
+      version='1.0.0',
+      description='A collection of helpers for use with Pyramid, Kajiki, Formencode, and SQLAlchemy',
       long_description=README + '\n\n' +  CHANGES,
       classifiers=[
                    'Development Status :: 4 - Beta',
@@ -26,7 +32,7 @@ setup(name='PyWebTools',
       author='Mark Hall',
       author_email='Mark.Hall@work.room3b.eu',
       url='http://bitbucket.org/mhall/pywebtools/overview',
-      keywords='web genshi',
+      keywords='web pyramid kajiki formencode SQLAlchemy',
       packages=find_packages('src'),
       package_dir = {'': 'src'},
       include_package_data=True,
