@@ -55,7 +55,7 @@ def check_database_version(db_version, dbsession=None):
     :type db_version: ``str``
     :param dbsession: The database session to use for database access. If ``None`` will
                       create a new session.
-    :type dbsession: :func:`~wlalchemy.orm.scoped_session
+    :type dbsession: :func:`~wlalchemy.orm.scoped_session`
     """
     if not dbsession:
         dbsession = DBSession()

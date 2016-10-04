@@ -99,7 +99,7 @@ def redirect(request, redirect_id, **kwargs):
     :type request: :class:`~pyramid.request.Request`
     :param redirect_id: The identifier of the redirect to execute
     :type redirect_id: ``str``
-    :param **kwargs: Keyword arguments to use for replacements
+    :param kwargs: Keyword arguments to use for replacements
     """
     if redirect_id in active_redirects:
         redirect_route = active_redirects[redirect_id]
