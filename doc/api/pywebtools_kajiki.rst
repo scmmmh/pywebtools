@@ -1,1 +1,2 @@
 .. automodule:: pywebtools.kajiki
+   :members:

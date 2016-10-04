@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-##########################################################################
-:mod:`pywebtools` -- Utilities for Kajiki, Pyramid, Formencode, SQLAlchemy
-##########################################################################
+###############################################################
+:mod:`pywebtools.pyramid.util` -- Utility Functions for Pyramid
+###############################################################
 
 Utility functions for use with the Pyramid framework.
 
