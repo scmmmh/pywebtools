@@ -6,6 +6,10 @@ Formencode_, and SQLAlchemy_ packages.
 
 Full documentation can be found at http://readthedocs.org/docs/pywebtools.
 
+.. image:: https://readthedocs.org/projects/pywebtools/badge/?version=latest
+   :target: http://pywebtools.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
+
 .. _Pyramid: https://trypyramid.com/
 .. _Kajiki: http://pythonhosted.org/Kajiki/
 .. _Formencode: http://www.formencode.org
