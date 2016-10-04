@@ -1,3 +1,8 @@
+0.5.2
+-----
+
+- BUGFIX: Use the request.response object to allow view code to modify the response
+
 0.5.1
 -----
 
