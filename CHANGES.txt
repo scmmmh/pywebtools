@@ -1,3 +1,8 @@
+1.0.1
+-----
+
+- BUGFIX: Fixed missing Kajiki files
+
 1.0.0
 -----
 
