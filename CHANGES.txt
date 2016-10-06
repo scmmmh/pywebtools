@@ -1,3 +1,7 @@
+1.0.2
+
+- NEW: Added py.test fixtures
+
 1.0.1
 -----
 
