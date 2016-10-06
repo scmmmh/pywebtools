@@ -34,7 +34,7 @@ class RequestTesterMixin(object):
     via the :class:`~pywebtools.testing.FunctionalTester`.
     """
 
-    def get_url(self, url, headers=None):
+    def get_url(self, url, headers=None, follow_redirects=True):
         """Send a GET request to the given ``url``.
 
         :param url: The url to request
@@ -52,6 +52,8 @@ class RequestTesterMixin(object):
         else:
             headers = [('Accept', '*/*')]
         self._response = self._test.get(url, headers=headers, status='*')
+        if self._response.status_int in [301, 302, 303] and follow_redirects:
+            self.get_url(self._response.headers['Location'], headers=headers, follow_redirects=False)
 
     def has_text(self, text):
         """Check whether the last response contains the given ``text``.
@@ -60,7 +62,7 @@ class RequestTesterMixin(object):
         :type text: ``unicode``
         """
         if self._response:
-            assert text in self._response.body.decode('utf-8')
+            assert text in self._response.body.decode('utf-8'), "%s not in %s" % (text, self._response.body.decode('utf-8'))
         else:
             assert False, 'No request sent'
 

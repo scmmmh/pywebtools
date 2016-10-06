@@ -1,4 +1,10 @@
+1.1.0
+-----
+
+- UPDATE: Follow re-directs on test requests
+
 1.0.2
+-----
 
 - NEW: Added py.test fixtures
 
