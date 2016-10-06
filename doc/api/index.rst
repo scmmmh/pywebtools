@@ -15,3 +15,4 @@ API Documentation
    pywebtools_pyramid_decorators
    pywebtools_pyramid_util
    pywebtools_sqlalchemy
+   pywebtools_testing
