@@ -18,7 +18,7 @@ requires = [
     ]
 
 setup(name='PyWebTools',
-      version='1.0.1',
+      version='1.0.2',
       description='A collection of helpers for use with Pyramid, Kajiki, Formencode, and SQLAlchemy',
       long_description=README + '\n\n' +  CHANGES,
       classifiers=[
