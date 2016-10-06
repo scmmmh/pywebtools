@@ -13,7 +13,8 @@ requires = [
     'pyramid',
     'decorator',
     'transaction',
-    'zope.sqlalchemy'
+    'zope.sqlalchemy',
+    'webtest'
     ]
 
 setup(name='PyWebTools',
@@ -39,4 +40,8 @@ setup(name='PyWebTools',
       zip_safe=False,
       test_suite='nose.collector',
       install_requires = requires,
+      entry_points="""
+      [pytest11]
+      pywebtools_testing = pywebtools.testing
+      """
       )
