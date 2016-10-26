@@ -475,8 +475,8 @@ def users(request):
         except ValueError:
             pass
     users = users.order_by(User.display_name)
-    pages = paginate(request, 'users', users, start, 30, query_params=query_params)
-    users = users.offset(start).limit(30)
+    pages = paginate(request, 'users', users, start, 25, query_params=query_params)
+    users = users.offset(start).limit(25)
     return {'users': users,
             'pages': pages,
             'crumbs': create_user_crumbs(request, [])}
