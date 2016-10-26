@@ -1,3 +1,9 @@
+1.0.3
+-----
+
+- BUGFIX: The pywebtools.pyramid.util.paginate function now takes the route_name for URL generation
+- BUGFIX: The pywebtools.pyramid.auth.views.users function now generates the pagination before limiting the query
+
 1.0.2
 
 - NEW: Added py.test fixtures
