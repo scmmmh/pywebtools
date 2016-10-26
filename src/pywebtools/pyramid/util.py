@@ -209,7 +209,7 @@ def paginate(request, route_name, query, start, rows, query_params=None):
     else:
         pages.append({'type': 'prev'})
     for idx in range(0, int(math.ceil(count / float(rows)))):
-        if idx == (start / 30):
+        if idx == (start / rows):
             pages.append({'type': 'current',
                           'label': str(idx + 1)})
         else:
@@ -218,7 +218,7 @@ def paginate(request, route_name, query, start, rows, query_params=None):
                           'url': request.route_url(route_name, _query=query_params + [('start', idx * rows)])})
     if start + rows < count:
         pages.append({'type': 'next',
-                      'url': request.route_url(route_name, _query=query_params + [('start', max(start + rows, count))])})
+                      'url': request.route_url(route_name, _query=query_params + [('start', min(start + rows, count))])})
     else:
         pages.append({'type': 'next'})
     return pages

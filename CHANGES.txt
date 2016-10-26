@@ -1,3 +1,8 @@
+1.0.4
+-----
+
+- BUGFIX: Fixed two small bugs with pagination
+
 1.0.3
 -----
 
