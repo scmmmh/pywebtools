@@ -1,6 +1,7 @@
 1.0.4
 -----
 
+- UPDATE: Switched the user pagination to use 25 rows
 - BUGFIX: Fixed two small bugs with pagination
 
 1.0.3
