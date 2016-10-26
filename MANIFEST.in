@@ -1,2 +1,2 @@
-include *.txt COPYING COPYING.LESSER
+include *.RST COPYING COPYING.LESSER
 recursive-include src *.kajiki
