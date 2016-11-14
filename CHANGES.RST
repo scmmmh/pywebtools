@@ -1,3 +1,8 @@
+1.0.6
+-----
+
+- *UPDATE*: Moved the WebTest requirement into a "testing" extra requirement
+
 1.0.5
 -----
 

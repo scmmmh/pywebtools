@@ -13,8 +13,13 @@ requires = [
     'pyramid',
     'decorator',
     'transaction',
-    'zope.sqlalchemy',
-    'webtest'
+    'zope.sqlalchemy'
+    ]
+
+tests_require = [
+    'WebTest >= 1.3.1',  # py3 compat
+    'pytest',  # includes virtualenv
+    'pytest-cov',
     ]
 
 setup(name='PyWebTools',
@@ -40,6 +45,9 @@ setup(name='PyWebTools',
       zip_safe=False,
       test_suite='nose.collector',
       install_requires = requires,
+      extras_require={
+          'testing': tests_require,
+      },
       entry_points="""
       [pytest11]
       pywebtools_testing = pywebtools.testing
