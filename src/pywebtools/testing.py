@@ -53,6 +53,35 @@ class RequestTesterMixin(object):
             headers = [('Accept', '*/*')]
         self._response = self._test.get(url, headers=headers, status='*')
 
+    def submit_form(self, form_id=None, values=None):
+        """Submits the form with the given ``form_id``, setting the ``values``
+        first.
+
+        :param form_id: The optional id of the form to submit. If not set,
+                        expects the response to hold a single form, which
+                        will be submitted
+        :type form_id: ``unicode``
+        :param values: The values to set on the form before submitting
+        :type values: ``dict``
+        """
+        if self._response:
+            if form_id:
+                form = self._response.form[form_id]
+            else:
+                form = self._response.form
+            for key, value in values.items():
+                form[key] = value
+            self._response = form.submit()
+        else:
+            assert False, 'No request sent'        
+
+    def follow_redirect(self):
+        """Follows a redirect specified in the current response."""
+        if self._response:
+            self._response = self._response.follow()
+        else:
+            assert False, 'No request sent'        
+        
     def has_text(self, text):
         """Check whether the last response contains the given ``text``.
 
