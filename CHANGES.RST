@@ -1,3 +1,8 @@
+1.0.7
+-----
+
+- *UPDATE*: Added functionality for submitting forms and following redirects to pywebtools.testing
+
 1.0.6
 -----
 
