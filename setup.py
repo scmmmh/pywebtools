@@ -23,7 +23,7 @@ tests_require = [
     ]
 
 setup(name='PyWebTools',
-      version='1.0.7',
+      version='1.0.8',
       description='A collection of helpers for use with Pyramid, Kajiki, Formencode, and SQLAlchemy',
       long_description=README + '\n\n' +  CHANGES,
       classifiers=[
