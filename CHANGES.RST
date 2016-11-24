@@ -1,3 +1,8 @@
+1.0.8
+-----
+
+- *UPDATE*: Updated the pywebtools.testing to support the full get/post/form submission workflow
+
 1.0.7
 -----
 
