@@ -29,10 +29,15 @@ def app():
     yield app
 
 
-class RequestTesterMixin(object):
-    """The :class:`~pywebtools.testing.RequestTesterMixin` provides functionality for making requests
-    via the :class:`~pywebtools.testing.FunctionalTester`.
+class PyramidAppTester(object):
+    """The :class:`~pywebtools.testing.RequestTester` provides functionality for testing requests
+    in a Pyramid application
     """
+
+    def __init__(self, app):
+        self._app = app
+        self._test = TestApp(app)
+        self._response = None
 
     def goto(self, href, **kwargs):
         """Sends a request using the method specified in the ``method`` keyword argument. If a previous
@@ -192,48 +197,9 @@ class RequestTesterMixin(object):
             assert False, 'No request sent'
 
 
-class FunctionalTester(RequestTesterMixin):
-    """The :class:`~pywebtools.testing.FunctionalTester` provides an easy interface for running
-    functional tests. It mixes in :class:`~pywebtools.testing.RequestTesterMixin` and
-    :class:`~pywebtools.testing.DBTesterMixin` to provide the actual functionality.
-
-    The :class:`~pywebtools.testing.FunctionalTester` should always be created via the
-    :func:`~pywebtools.testing.functional_tester` fixture.
-    """
-
-    def __init__(self, app):
-        self._app = app
-        self._test = TestApp(app)
-        self._response = None
-
-
 @pytest.yield_fixture
-def functional_tester(app):
-    """Fixture that provides a :class:`~pywebtools.testing.FunctionalTester`.
+def pyramid_app_tester(app):
+    """Fixture that provides a :class:`~pywebtools.testing.PyramidAppTester`.
     """
-    tester = FunctionalTester(app)
+    tester = PyramidAppTester(app)
     yield tester
-
-
-@pytest.yield_fixture
-def request(app):
-    """Fixture that provides a :class:`~pyramid.request.Request` that is
-    simulated to have requested http://localhost."""
-    request = Request({'REQUEST_METHOD': 'GET',
-                       'SCRIPT_NAME': '',
-                       'PATH_INFO': '',
-                       'QUERY_STRING': '',
-                       'CONTENT_TYPE': '',
-                       'CONTENT_LENGTH': '',
-                       'SERVER_NAME': 'localhost',
-                       'SERVER_PORT': '80',
-                       'SERVER_PROTOCOL': 'HTTP/1.0',
-                       'wsgi.version': (1, 0),
-                       'wsgi.url_scheme': 'http',
-                       'wsgi.input': '',
-                       'wsgi.errors': '',
-                       'wsgi.multithread': False,
-                       'wsgi.multiprocess': False,
-                       'wsgi.run_once': False})
-    request.registry = app.registry
-    yield request

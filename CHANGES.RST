@@ -1,3 +1,10 @@
+1.1.0
+-----
+
+- *UPDATE*: Refactored the pywebtools.testing FunctionalTester to PyramidAppTester
+- *UPDATE*: Refactored the pywebtools.testing functional_tester fixture to pyramid_app_tester
+- *UPDATE*: Removed the pywebtools.testing request fixture
+
 1.0.8
 -----
 
