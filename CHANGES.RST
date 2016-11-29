@@ -3,6 +3,7 @@
 
 - *BUGFIX*: Fixed a bug in the form display of checkboxes
 - *BUGFIX*: Fixed a bug in the reselection of checkboxes
+- *BUGFIX*: Fixed a bug in the reselection of select items
 
 1.1.0
 -----
