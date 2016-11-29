@@ -1,3 +1,8 @@
+1.1.1
+-----
+
+- *BUGFIX*: Fixed a bug in the form display of checkboxes
+
 1.1.0
 -----
 
