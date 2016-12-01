@@ -128,12 +128,22 @@ class PyramidAppTester(object):
                         if field.has_attr('value') and name in values:
                             if field['value'] in values[name]:
                                 body.append((name, field['value']))
+                            elif force_value:
+                                if isinstance(values[name], list):
+                                    for sub_value in values[name]:
+                                        body.append((name, sub_value))
+                                else:
+                                    body.append((name, values[name]))
                         elif field.has_attr('value') and field.has_attr('checked'):
                             body.append((name, field['value']))
                         elif 'on' in values[name] or field.has_attr('checked'):
                             body.append((name, 'on'))
                         elif force_value and name in values:
-                            body.append((name, values[name]))
+                            if isinstance(values[name], list):
+                                for sub_value in values[name]:
+                                    body.append((name, sub_value))
+                            else:
+                                body.append((name, values[name]))
                     elif field_type == 'radio':
                         if field.has_attr('value') and name in values and field['value'] == values[name]:
                             body.append((name, str(values[name])))
@@ -142,7 +152,11 @@ class PyramidAppTester(object):
                         elif 'on' == values[name] or field.has_attr('checked'):
                             body.append((name, 'on'))
                         elif force_value and name in values:
-                            body.append((name, values[name]))
+                            if isinstance(values[name], list):
+                                for sub_value in values[name]:
+                                    body.append((name, sub_value))
+                            else:
+                                body.append((name, values[name]))
                     elif field_type == 'file':
                         if name in values:
                             body.append((name, values[name]))
