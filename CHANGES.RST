@@ -1,3 +1,8 @@
+1.1.2
+-----
+
+- *UPDATE*: Enable forcing values when submitting forms in pywebtools.testing
+
 1.1.1
 -----
 

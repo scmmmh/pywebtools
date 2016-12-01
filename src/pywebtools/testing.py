@@ -91,7 +91,7 @@ class PyramidAppTester(object):
         kwargs['method'] = 'post'
         self.goto(href, **kwargs)
 
-    def submit_form(self, form_id=None, form_idx=None, values=None, **kwargs):
+    def submit_form(self, form_id=None, form_idx=None, values=None, force_value=False, **kwargs):
         """Submits a form.
 
         :param form_id: The optional id value to use to select the form to submit 
@@ -100,6 +100,8 @@ class PyramidAppTester(object):
         :param form_idx: ``int``
         :param values: The values to set on the form before submitting
         :type values: ``dict``
+        :param force_value: Force setting values on selects/checkboxes even if that value does not exist
+        :type force_value: ``boolean`` 
         """
         if self._response:
             if form_id is not None:
@@ -130,6 +132,8 @@ class PyramidAppTester(object):
                             body.append((name, field['value']))
                         elif 'on' in values[name] or field.has_attr('checked'):
                             body.append((name, 'on'))
+                        elif force_value and name in values:
+                            body.append((name, values[name]))
                     elif field_type == 'radio':
                         if field.has_attr('value') and name in values and field['value'] == values[name]:
                             body.append((name, str(values[name])))
@@ -137,6 +141,8 @@ class PyramidAppTester(object):
                             body.append((name, field['value']))
                         elif 'on' == values[name] or field.has_attr('checked'):
                             body.append((name, 'on'))
+                        elif force_value and name in values:
+                            body.append((name, values[name]))
                     elif field_type == 'file':
                         if name in values:
                             body.append((name, values[name]))
@@ -150,8 +156,9 @@ class PyramidAppTester(object):
                 elif field.name == 'select':
                     if name in values:
                         option = field.find_all(name='option', value=str(values[name]))
-                        assert len(option) > 0, '0 select options found with the value %s' % values[name]
-                        assert len(option) == 1, 'More than one select option found with the value %s' % values[name]
+                        if not force_value:
+                            assert len(option) > 0, '0 select options found with the value %s' % values[name]
+                            assert len(option) == 1, 'More than one select option found with the value %s' % values[name]
                         body.append((name, str(values[name])))
                     else:
                         option = field.find_all(lambda t: t.name == 'option' and t.has_attr('selected'))
