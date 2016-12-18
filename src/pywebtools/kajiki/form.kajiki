@@ -3,7 +3,7 @@
   <py:def function="input(field_type, field_name, **kwargs)">
     <py:switch test="field_type">
       <py:case value="'checkbox'">
-        <py:if test="(defined('values') and field_name in values and kwargs['value'] in values[field_name] if 'value' in kwargs else 'on' in kwargs['value']) or ('checked' in kwargs and kwargs['checked'])">
+        <py:if test="(defined('values') and field_name in values and str(kwargs['value']) in values.getall(field_name) if 'value' in kwargs else 'on' in kwargs['value']) or ('checked' in kwargs and kwargs['checked'])">
           <input type="checkbox" name="${field_name}" value="${kwargs['value'] if 'value' in kwargs else 'on'}" checked="checked" py:attrs="kwargs['extra_attrs'] if 'extra_attrs' in kwargs else None"/>
         </py:if><py:else>
           <input type="checkbox" name="${field_name}" value="${kwargs['value'] if 'value' in kwargs else 'on'}" py:attrs="kwargs['extra_attrs'] if 'extra_attrs' in kwargs else None"/>
@@ -15,9 +15,9 @@
       <py:case value="'select'">
         <select name="${field_name}">
           <py:if test="defined('values') and field_name in values">
-            <option py:for="(value, label) in kwargs['values']" value="${value}" py:attrs="{'selected': 'selected' if values[field_name] == value else None}">${label}</option>
+            <option py:for="(value, label) in kwargs['values']" value="${value}" py:attrs="{'selected': 'selected' if values[field_name] == str(value) else None}">${label}</option>
           </py:if><py:else>
-            <option py:for="(value, label) in kwargs['values']" value="${value}" py:attrs="{'selected': 'selected' if 'value' in kwargs and kwargs['value'] == value else None}">${label}</option>
+            <option py:for="(value, label) in kwargs['values']" value="${value}" py:attrs="{'selected': 'selected' if 'value' in kwargs and kwargs['value'] == str(value) else None}">${label}</option>
           </py:else>
         </select>
       </py:case>
