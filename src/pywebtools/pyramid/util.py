@@ -177,11 +177,13 @@ class MenuBuilder(object):
         return self._groups
 
 
-def paginate(request, query, start, rows, query_params=None):
+def paginate(request, route_name, query, start, rows, query_params=None):
     """Generates the list of pages for a query.
 
     :param request: The request used to generate URLs
     :type request: :class:`~pyramid.request.Request`
+    :param route_name: The name of the route to use for URLs
+    :type route_name: :py:func:`str`
     :param query: The SQLAlchemy query to generate the pagination for
     :type query: :class:`~sqlalchemy.orm.query.Query`
     :param start: The current starting index
@@ -203,20 +205,20 @@ def paginate(request, query, start, rows, query_params=None):
     pages = []
     if start > 0:
         pages.append({'type': 'prev',
-                      'url': request.route_url('users', _query=query_params + [('start', max(start - rows, 0))])})
+                      'url': request.route_url(route_name, _query=query_params + [('start', max(start - rows, 0))])})
     else:
         pages.append({'type': 'prev'})
     for idx in range(0, int(math.ceil(count / float(rows)))):
-        if idx == (start / 30):
+        if idx == (start / rows):
             pages.append({'type': 'current',
                           'label': str(idx + 1)})
         else:
             pages.append({'type': 'item',
                           'label': str(idx + 1),
-                          'url': request.route_url('users', _query=query_params + [('start', idx * rows)])})
+                          'url': request.route_url(route_name, _query=query_params + [('start', idx * rows)])})
     if start + rows < count:
         pages.append({'type': 'next',
-                      'url': request.route_url('users', _query=query_params + [('start', max(start + rows, count))])})
+                      'url': request.route_url(route_name, _query=query_params + [('start', min(start + rows, count))])})
     else:
         pages.append({'type': 'next'})
     return pages
