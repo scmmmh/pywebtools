@@ -1,3 +1,13 @@
+1.1.3
+-----
+
+- *UPDATE*: Set the extra_args on select fields in pywebtools.kajiki.form.kajiki
+
+1.1.2
+-----
+
+- *UPDATE*: Enable forcing values when submitting forms in pywebtools.testing
+
 1.1.1
 -----
 
