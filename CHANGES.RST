@@ -2,6 +2,7 @@
 -----
 
 - *UPDATE*: Set the extra_args on select fields in pywebtools.kajiki.form.kajiki
+- *BUGFIX*: Correctly select radio boxes in pywebtools.kajiki.form.kajiki
 
 1.1.2
 -----
