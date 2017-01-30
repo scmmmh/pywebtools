@@ -21,8 +21,15 @@
           </py:else>
         </select>
       </py:case>
+      <py:case value="'radio'">
+        <py:if test="(defined('values') and field_name in values and kwargs['value'] in values[field_name] if 'value' in kwargs else 'on' in kwargs['value']) or ('checked' in kwargs and kwargs['checked'])">
+          <input type="radio" name="${field_name}" value="${kwargs['value'] if 'value' in kwargs else 'on'}" checked="checked" py:attrs="kwargs['extra_attrs'] if 'extra_attrs' in kwargs else None"/>
+        </py:if><py:else>
+          <input type="radio" name="${field_name}" value="${kwargs['value'] if 'value' in kwargs else 'on'}" py:attrs="kwargs['extra_attrs'] if 'extra_attrs' in kwargs else None"/>
+        </py:else>
+      </py:case>
     </py:switch>
-    <py:if test="field_type not in ['checkbox', 'textarea', 'select']">
+    <py:if test="field_type not in ['checkbox', 'textarea', 'select', 'radio']">
       <py:if test="defined('values') and field_name in values">
         <input type="${field_type}" name="${field_name}" value="${values[field_name]}" py:attrs="kwargs['extra_attrs'] if 'extra_attrs' in kwargs else None"/>
       </py:if><py:else>
