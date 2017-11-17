@@ -3,8 +3,9 @@
 :mod:`pywebtools.testing` -- py.test plugins
 ############################################
 
-The primary use point is the :func:`~pywebtools.testing.functional_tester`
-fixture.
+The primary use point is the :func:`~pywebtools.testing.pyramid_app_tester`
+fixture, which generates a :class:`~pywebtools.testing.PyramidAppTester` for
+the given application.
 
 .. moduleauthor:: Mark Hall <mark.hall@work.room3b.eu>
 """
@@ -72,7 +73,7 @@ class PyramidAppTester(object):
                 self._response = self._test.post(href, **valid_args)
             else:
                 assert kwargs['method'].lower() in ['get', 'post'], 'Only get and post requests are supported'
-        
+
     def get(self, href, **kwargs):
         """Send a GET request to the given ``href``.
 
@@ -94,14 +95,14 @@ class PyramidAppTester(object):
     def submit_form(self, form_id=None, form_idx=None, values=None, force_value=False, **kwargs):
         """Submits a form.
 
-        :param form_id: The optional id value to use to select the form to submit 
+        :param form_id: The optional id value to use to select the form to submit
         :type form_id: ``unicode``
         :param form_idx: The optional form index to select the form to submit
         :param form_idx: ``int``
         :param values: The values to set on the form before submitting
         :type values: ``dict``
         :param force_value: Force setting values on selects/checkboxes even if that value does not exist
-        :type force_value: ``boolean`` 
+        :type force_value: ``boolean``
         """
         if self._response:
             if form_id is not None:
@@ -190,15 +191,15 @@ class PyramidAppTester(object):
             action = form['action'] if form.has_attr('action') else ''
             self.goto(action, method=method, params=body, **kwargs)
         else:
-            assert False, 'No request sent'        
+            assert False, 'No request sent'
 
     def follow_redirect(self, **kwargs):
         """Follows a redirect specified in the current response."""
         if self._response:
             self._response = self._response.follow(**kwargs)
         else:
-            assert False, 'No request sent'        
-        
+            assert False, 'No request sent'
+
     def has_text(self, text):
         """Check whether the last response contains the given ``text``.
 
