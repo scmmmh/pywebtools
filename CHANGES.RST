@@ -1,3 +1,8 @@
+1.2.0
+-----
+
+- *UPDATE*: Added extra helper functions to the PyramidAppTester
+
 1.1.3
 -----
 
@@ -83,7 +88,7 @@
 -----
 
 - *NEW*: assert_authorised raises an auth.AccessDeniedException if the authorisation statement does not hold
-  
+
 0.4.2
 -----
 
