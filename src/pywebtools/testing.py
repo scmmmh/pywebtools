@@ -111,9 +111,10 @@ class PyramidAppTester(object):
                 assert len(form) == 1, 'More than 1 form found with the id %s' % form_id
                 form = form[0]
             elif form_idx is not None:
-                form = self._response.html.find_all(name='form', id=form_id)
+                form = self._response.html.find_all(name='form')
                 assert len(form) > 0, '0 forms found'
-                assert len(form) > form_idx + 1, 'No form at index %i' % form_idx
+                assert len(form) > form_idx, 'No form at index %i' % form_idx
+                form = form[form_idx]
             else:
                 form = self._response.html.find_all(name='form')
                 assert len(form) > 0, '0 forms found'
@@ -162,7 +163,7 @@ class PyramidAppTester(object):
                         if name in values:
                             body.append((name, values[name]))
                     else:
-                        if name in values:
+                        if values and name in values:
                             body.append((name, str(values[name])))
                         elif field.has_attr('value'):
                             body.append((name, field['value']))
@@ -208,6 +209,17 @@ class PyramidAppTester(object):
         """
         if self._response:
             assert text in self._response.text, '"%s" not found in %s' % (text, self._response.text)
+        else:
+            assert False, 'No request sent'
+
+    def not_has_text(self, text):
+        """Check that the last response does not contain the given ``text``.
+
+        :param text: The text to look for
+        :type text: ``unicode``
+        """
+        if self._response:
+            assert text not in self._response.text, '"%s" found in %s' % (text, self._response.text)
         else:
             assert False, 'No request sent'
 
